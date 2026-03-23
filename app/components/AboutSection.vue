@@ -125,7 +125,7 @@ onMounted(() => {
 
 <template>
   <section id="about" class="py-24">
-    <div class="max-w-4xl mx-auto px-6">
+    <div class="max-w-6xl mx-auto px-6">
       <h2
         v-reveal
         class="text-3xl font-bold mb-12 border-l-4 border-accent pl-4"
