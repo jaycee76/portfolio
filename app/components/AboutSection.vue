@@ -25,7 +25,6 @@ const EASTER_EGGS: Record<string, string> = {
   help: 'Available commands: whoami, skills, contact, joke, clear',
   contact: 'Email: jaycee.a.jasmin@gmail.com | LinkedIn: /in/johnchristopherjasmin/',
   joke: "Why do programmers prefer dark mode? Because light attracts bugs.",
-  clear: '__CLEAR__',
 }
 
 async function typeCommand(text: string, speed = 60) {
@@ -78,8 +77,9 @@ async function runSequence() {
   }
   lines.value.push({ type: 'empty', text: '' })
 
-  isRunning.value = false
   showCursor.value = true
+  isRunning.value = false
+  nextTick(() => inputRef.value?.focus())
 }
 
 function handleCommand() {
