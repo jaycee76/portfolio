@@ -1,7 +1,38 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import { useTheme } from '~/composables/useTheme'
+
+const { initTheme } = useTheme()
 
 onMounted(() => {
+  initTheme()
+
+  // Cursor
+  const dot = document.createElement('div')
+  dot.className = 'cursor-dot'
+  const ring = document.createElement('div')
+  ring.className = 'cursor-ring'
+  document.body.appendChild(dot)
+  document.body.appendChild(ring)
+
+  let mouseX = 0, mouseY = 0
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX
+    mouseY = e.clientY
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`
+    ring.style.transform = `translate(${mouseX}px, ${mouseY}px)`
+  })
+
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target as HTMLElement
+    if (target.closest('a, button')) {
+      ring.classList.add('hovered')
+    } else {
+      ring.classList.remove('hovered')
+    }
+  })
+
+  // Word hover
   const skip = new Set(['SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA', 'SELECT', 'CODE', 'PRE'])
 
   function wrapWords(node: Node) {
@@ -23,7 +54,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-dark min-h-screen">
+  <div class="min-h-screen" style="background-color: var(--color-bg)">
     <app-nav />
     <hero-section />
     <about-section />
