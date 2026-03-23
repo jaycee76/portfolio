@@ -10,8 +10,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent: '#2ecc71',
-        dark: '#0d0d0d',
+        accent: 'var(--color-accent)',
+        dark: 'var(--color-bg)',
+        surface: 'var(--color-surface)',
+        foreground: 'var(--color-text)',
+        muted: 'var(--color-text-muted)',
       },
       fontFamily: {
         cursive: ['Pacifico', 'cursive'],
