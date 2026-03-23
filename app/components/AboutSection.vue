@@ -23,6 +23,8 @@ const FAKE_COMMITS = [
 
 const EASTER_EGGS: Record<string, string> = {
   help: 'Available commands: whoami, skills, contact, joke, clear',
+  whoami: 'John Christopher Jasmin — Software Engineer & AI Builder',
+  skills: 'frontend/  backend/  ai-orchestration/  devops/',
   contact: 'Email: jaycee.a.jasmin@gmail.com | LinkedIn: /in/johnchristopherjasmin/',
   joke: "Why do programmers prefer dark mode? Because light attracts bugs.",
 }
@@ -61,7 +63,7 @@ async function runSequence() {
 
   await sleep(600)
   await typeCommand('whoami')
-  await showOutput('jaycee jasmin')
+  await showOutput('John Christopher Jasmin')
 
   await typeCommand('cat bio.txt')
   await showOutput(BIO)
