@@ -11,29 +11,41 @@ const contacts = [
 <template>
   <section id="contact" class="py-24">
     <div class="max-w-2xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold text-white mb-4 border-l-4 border-accent pl-4 text-left">
+      <h2
+        v-reveal
+        class="text-3xl font-bold mb-4 border-l-4 border-accent pl-4 text-left"
+        style="color: var(--color-text)"
+      >
         Get In Touch
       </h2>
-      <p class="text-white/50 text-sm mb-12 text-left">Feel free to reach out through any of the channels below.</p>
+      <p
+        v-reveal
+        class="text-sm mb-12 text-left"
+        style="color: var(--color-text-muted)"
+      >
+        Feel free to reach out through any of the channels below.
+      </p>
 
       <div class="space-y-4">
         <a
-          v-for="contact in contacts"
+          v-for="(contact, index) in contacts"
           :key="contact.label"
+          v-reveal="{ delay: index * 100 }"
           :href="contact.href"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-4 bg-[#1a1a1a] border border-transparent hover:border-accent rounded-xl px-6 py-4 transition-colors duration-200 group"
+          class="flex items-center gap-4 border border-transparent hover:border-accent rounded-xl px-6 py-4 transition-colors duration-200 group"
+          style="background-color: var(--color-surface)"
         >
           <component :is="contact.icon" :size="20" class="text-accent shrink-0" />
           <div class="text-left">
-            <p class="text-white/50 text-xs uppercase tracking-widest">{{ contact.label }}</p>
-            <p class="text-white font-medium group-hover:text-accent transition-colors duration-200">{{ contact.value }}</p>
+            <p class="text-xs uppercase tracking-widest" style="color: var(--color-text-muted)">{{ contact.label }}</p>
+            <p class="font-medium group-hover:text-accent transition-colors duration-200" style="color: var(--color-text)">{{ contact.value }}</p>
           </div>
         </a>
       </div>
 
-      <p class="text-white/30 text-sm text-center mt-16">
+      <p class="text-sm text-center mt-16" style="color: var(--color-text-muted); opacity: 0.4">
         © 2026 John Christopher Jasmin. All rights reserved.
       </p>
     </div>
