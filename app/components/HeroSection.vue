@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useTypewriter } from '~/composables/useTypewriter'
+const { displayed } = useTypewriter()
 
 const particlesRef = ref<{ updateMouse: (x: number, y: number) => void, resetMouse: () => void } | null>(null)
 
@@ -36,7 +38,7 @@ function onMouseLeave() {
         John Christopher Jasmin
       </h1>
       <p class="text-2xl font-medium text-accent">
-        Software Engineer | AI Engineer
+        {{ displayed }}<span class="typewriter-cursor" aria-hidden="true" />
       </p>
     </div>
   </section>
