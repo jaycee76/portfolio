@@ -1,4 +1,4 @@
-import { ref, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const ROLES = [
   'Software Engineer',
@@ -48,7 +48,7 @@ export function useTypewriter() {
     typeNext()
   }
 
-  typeRole(0)
+  onMounted(() => typeRole(0))
 
   onUnmounted(() => {
     timers.forEach(clearTimeout)
