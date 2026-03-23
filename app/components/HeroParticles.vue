@@ -121,6 +121,7 @@ onMounted(() => {
 
   onUnmounted(() => {
     cancelAnimationFrame(animationId)
+    clearTimeout(resizeTimer)
     document.removeEventListener('visibilitychange', handleVisibility)
     window.removeEventListener('resize', handleResize)
   })
