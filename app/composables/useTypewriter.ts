@@ -3,7 +3,6 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const ROLES = [
   'Software Engineer',
   'AI Engineer',
-  'Automation Architect',
   'Full-Stack Developer',
 ]
 
