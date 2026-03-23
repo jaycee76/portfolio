@@ -23,7 +23,7 @@ const FAKE_COMMITS = [
 
 const EASTER_EGGS: Record<string, string> = {
   help: 'Available commands: whoami, skills, contact, joke, clear',
-  whoami: 'John Christopher Jasmin — Software Engineer & AI Builder',
+  whoami: 'John Christopher Jasmin',
   skills: 'frontend/  backend/  ai-orchestration/  devops/',
   contact: 'Email: jaycee.a.jasmin@gmail.com | LinkedIn: /in/johnchristopherjasmin/',
   joke: "Why do programmers prefer dark mode? Because light attracts bugs.",
