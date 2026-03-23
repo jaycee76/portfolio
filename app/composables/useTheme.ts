@@ -9,8 +9,10 @@ export function useTheme() {
 
   function applyTheme(t: Theme) {
     theme.value = t
-    document.documentElement.setAttribute('data-theme', t)
-    localStorage.setItem('theme', t)
+    if (import.meta.client) {
+      document.documentElement.setAttribute('data-theme', t)
+      localStorage.setItem('theme', t)
+    }
   }
 
   function toggleTheme() {
@@ -18,6 +20,7 @@ export function useTheme() {
   }
 
   function initTheme() {
+    if (!import.meta.client) return
     const stored = localStorage.getItem('theme') as Theme | null
     if (stored === 'dark' || stored === 'light') {
       applyTheme(stored)

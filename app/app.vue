@@ -1,36 +1,39 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { useTheme } from '~/composables/useTheme'
 
 const { initTheme } = useTheme()
+
+let dot: HTMLDivElement | null = null
+let ring: HTMLDivElement | null = null
+
+function onMouseMove(e: MouseEvent) {
+  dot!.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+  ring!.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+}
+
+function onMouseOver(e: MouseEvent) {
+  const target = e.target as HTMLElement
+  if (target.closest('a, button')) {
+    ring!.classList.add('hovered')
+  } else {
+    ring!.classList.remove('hovered')
+  }
+}
 
 onMounted(() => {
   initTheme()
 
   // Cursor
-  const dot = document.createElement('div')
+  dot = document.createElement('div')
   dot.className = 'cursor-dot'
-  const ring = document.createElement('div')
+  ring = document.createElement('div')
   ring.className = 'cursor-ring'
   document.body.appendChild(dot)
   document.body.appendChild(ring)
 
-  let mouseX = 0, mouseY = 0
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX
-    mouseY = e.clientY
-    dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`
-    ring.style.transform = `translate(${mouseX}px, ${mouseY}px)`
-  })
-
-  document.addEventListener('mouseover', (e) => {
-    const target = e.target as HTMLElement
-    if (target.closest('a, button')) {
-      ring.classList.add('hovered')
-    } else {
-      ring.classList.remove('hovered')
-    }
-  })
+  window.addEventListener('mousemove', onMouseMove)
+  document.addEventListener('mouseover', onMouseOver)
 
   // Word hover
   const skip = new Set(['SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA', 'SELECT', 'CODE', 'PRE'])
@@ -50,6 +53,13 @@ onMounted(() => {
   }
 
   wrapWords(document.body)
+})
+
+onUnmounted(() => {
+  dot?.remove()
+  ring?.remove()
+  window.removeEventListener('mousemove', onMouseMove)
+  document.removeEventListener('mouseover', onMouseOver)
 })
 </script>
 
