@@ -2,10 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+:root,
+[data-theme="dark"] {
+  --color-bg: #0d0d0d;
+  --color-surface: #1a1a1a;
+  --color-text: #f5f5f5;
+  --color-text-muted: #888;
+  --color-accent: #2ecc71;
+  --color-border: rgba(46, 204, 113, 0.2);
+}
+
+[data-theme="light"] {
+  --color-bg: #fafaf9;
+  --color-surface: #f5f5f4;
+  --color-text: #1c1917;
+  --color-text-muted: #78716c;
+  --color-accent: #16a34a;
+  --color-border: rgba(22, 163, 74, 0.2);
+}
+
 body {
-  background-color: #0d0d0d;
-  color: #ffffff;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html {
@@ -18,5 +38,167 @@ html {
 }
 
 .word-hover:hover {
-  color: #2ecc71;
+  color: var(--color-accent);
+}
+
+/* Custom cursor */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+}
+
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  background-color: transparent;
+  border: 2px solid var(--color-accent);
+  opacity: 0.6;
+  transition: transform 0.12s ease, opacity 0.2s ease, width 0.2s ease, height 0.2s ease;
+}
+
+.cursor-ring.hovered {
+  transform: scale(1.8);
+  opacity: 0.3;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* Terminal — intentionally uses a fixed dark palette regardless of page theme,
+   so it always resembles a real terminal emulator. Not theme-driven by design. */
+.terminal-window {
+  background-color: #0a0a0a;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+}
+
+[data-theme="light"] .terminal-window {
+  background-color: #1e1e1e;
+  border-color: #444;
+}
+
+.terminal-titlebar {
+  background-color: #1a1a1a;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+[data-theme="light"] .terminal-titlebar {
+  background-color: #2d2d2d;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-body {
+  padding: 16px;
+  min-height: 320px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #d4d4d4;
+  overflow-y: auto;
+  max-height: 420px;
+}
+
+.terminal-line {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-prompt {
+  color: var(--color-accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.terminal-output {
+  color: #aaa;
+  padding-left: 0;
+  white-space: pre-wrap;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background-color: var(--color-accent);
+  animation: cursor-blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 16px;
+  border-top: 1px solid #333;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #d4d4d4;
+  font-family: inherit;
+  font-size: 13px;
+  flex: 1;
+  caret-color: var(--color-accent);
+}
+
+/* Typewriter cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: var(--color-accent);
+  margin-left: 2px;
+  animation: cursor-blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+/* Scroll reveal base state */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
