@@ -18,8 +18,8 @@ export function useScrollReveal(): ObjectDirective<HTMLElement, RevealOptions> {
           setTimeout(() => {
             el.classList.remove('reveal-hidden')
             el.classList.add('reveal-visible')
+            observer.unobserve(el)
           }, delay)
-          observer.unobserve(el)
         }
       })
     },
