@@ -18,6 +18,13 @@ const projects: Project[] = [
     demo: "https://phendexmedical.net/",
   },
   {
+    title: "Litro.ph",
+    description: "A driver companion app integrated with Google's Gemma AI that helps drivers calculate fuel consumption, track expenses, plan trips, and calculate toll fees.",
+    tags: ["Nuxt 3", "TypeScript", "Tailwind CSS", "Google GenAI SDK"],
+    github: "https://github.com/jaycee76/smart-driver-assistant",
+    demo: "https://litro.vercel.app/",
+  },
+  {
     title: "Typing Speed Test",
     description: "Passion project to build a typing speed test app with real-time WPM and accuracy tracking. *** In progress ***",
     tags: ["VueJS", "Nuxt 3", "TypeScript"],
